@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: test
+  application:
+    #这里的name指的是在nacos的Configuration中配置的Data ID，实际应用名称以配置中心的配置为准
+    name: emaster-flowable-config-${spring.profiles.active}
+  cloud:
+    nacos:
+      config:
+        #Nacos server 的地址
+        server-addr: 127.0.0.1:8848
+        #指定查找名称为 emaster-flowable-config.yml的文件
+        file-extension: yaml

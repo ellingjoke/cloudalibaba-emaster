@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: emaster-sys-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+#        server-addr: 172.30.121.27:8848   #nacos中的nacos服务发现
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: 127.0.0.1:9099
+  redis:
+    #连接地址
+    host: "localhost"
+    #端口
+    port: 16379
+    #数据库
+    database: 0
+    #用户名，如果有
+    #username:
+    #密码，如果有
+    #password
+    #连接超时
+    connect-timeout: 5s
+    #读超时
+    timeout: 5s
+    #lettuce客户端的配置
+    lettuce:
+      #连接池配置
+      pool:
+        # 最小空闲连接
+        min-idle: 0
+        #最大空闲连接
+        max-idle: 8
+        #最大活跃连接
+        max-active: 8
+        #从连接池获取连接 最大超时时间，小于等于0则表示不会超时
+        max-wait: -1ms
+server:
+  port: 9001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+feign:
+  sentinel:
+    enabled: true
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    group: springBootGroup          #生产者组别
+    send-message-timeout: 30000     #消息发送的超时时间
+    retry-times-when-send-async-failed: 2   #异步消息发送失败重试次数
+    max-message-size: 4194304       #消息的最大长度
